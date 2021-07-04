@@ -1,0 +1,23 @@
+Data Step
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}}); 
+ set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+ BMI=(weight/height**2)*703;
+ keep weight height bmi bmi_group;
+ if BMI=. then BMI_Group=.;
+ if BMI<25 then BMI_Group=1;
+ if BMI>=25 then BMI_Group=2;
+run;
+
+
+
+CASL
+
+loadActionSet 'datastep';
+dsCode='data _dp_outputTable (caslib=_dp_outputCaslib); 
+ set _dp_inputTable (caslib=_dp_inputCaslib);
+ BMI=(weight/height**2)*703;
+ keep weight height bmi bmi_group;
+ if BMI=. then BMI_Group=.;
+ if BMI<25 then BMI_Group=1;
+ if BMI>=25 then BMI_Group=2;
+run;';

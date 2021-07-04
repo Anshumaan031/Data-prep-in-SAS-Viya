@@ -1,0 +1,7 @@
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}}); 
+ set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+	retain "ClusterNum"n 0;
+	by FullName Address;
+	if first.Address then
+	     ClusterNum = ClusterNum + 1;
+run;

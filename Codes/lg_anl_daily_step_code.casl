@@ -1,0 +1,22 @@
+loadActionSet 'fedSQL';
+
+itbl='"'||_dp_inputCaslib||'"."'|| _dp_inputTable||'"';
+print 'itbl= ' itbl;
+
+otbl='"'||_dp_outputCaslib||'"."'||_dp_outputTable||'" {options replace=true}';
+print 'otbl= ' otbl;
+
+magosub='(select max(makedate(usage_year,usage_month,1)) from "'||_dp_inputCaslib||'"."'|| _dp_inputTable ||'" )';
+print 'magosub= ' magosub;
+
+mago="intck('MONTH',makedate(usage_year,usage_month,1),"||magosub||')';
+print 'mago= ' mago;
+
+queryCode='create table '||otbl||
+          ' as select  distinct pk_customer_id , '||
+ 	      mago||
+ 	      ' as mago, sum(CURR_SEC_OUTLDI) as CURR_SEC_OUTLDI '||
+ 		  ' from '||itbl||' group by pk_customer_id, usage_year,usage_month';
+print 'queryCode= ' queryCode;
+
+ExecDirect / query=queryCode;

@@ -1,0 +1,9 @@
+loadActionSet 'datastep';
+dsCode='data "'||_dp_outputTable ||'" (caslib="'||_dp_outputCaslib);
+        length "Customer_Status"n $ 8;
+		format "Customer_Status"n $CHAR8.;
+		set "'|| _dp_inputTable || '" (caslib='||_dp_inputCaslib||'");
+		if "CUSTOMER_ID"n > 8000 then "Customer_Status"n="New";
+		   else "Customer_Status"n="Existing";
+		nthreads="4";
+		run;';

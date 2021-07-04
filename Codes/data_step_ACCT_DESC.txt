@@ -1,0 +1,8 @@
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}}); 
+ set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+ length ACCT_DESC varchar(20);
+ if ACCT_TYPE="" then ACCT_DESC="Unknown";
+ if ACCT_TYPE="SAV" then ACCT_DESC="Savings";
+ if ACCT_TYPE= "MM" then ACCT_DESC="Money Market";
+ if ACCT_TYPE="CHK" then ACCT_DESC="Checking";
+ run;

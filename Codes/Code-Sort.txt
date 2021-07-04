@@ -1,0 +1,5 @@
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}});
+     set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+	by PostalCode LastName;
+run;
+	

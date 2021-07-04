@@ -1,0 +1,5 @@
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}}); 
+ set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+	by FullName Address UpdatedDate;
+	if last.Address then output;
+run;

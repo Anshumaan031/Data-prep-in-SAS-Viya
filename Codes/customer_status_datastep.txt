@@ -1,0 +1,6 @@
+data {{_dp_outputTable}} (caslib={{_dp_outputCaslib}});
+	length Customer_Status varchar(8);
+	set {{_dp_inputTable}} (caslib={{_dp_inputCaslib}});
+	if CUSTOMER_ID > 8000 THEN Customer_Status="New";
+	else Customer_Status="Existing";
+run;
